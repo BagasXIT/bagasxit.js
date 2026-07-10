@@ -13,7 +13,7 @@
 
   // ==========================================
   // SAKELAR ON/OFF (Ganti "ON" untuk aktif, ganti "OFF" untuk mematikan script)
-  const SCRIPT_STATUS = "OFF"; 
+  const SCRIPT_STATUS = "ON"; 
 
   // ISI LINK SALURAN WHATSAPP KAMU DI SINI
   const WHATSAPP_LINK = "https://whatsapp.com/channel/0029Vb6Eyam7oQhZLQKN9E3P";
