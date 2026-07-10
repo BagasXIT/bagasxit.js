@@ -8,7 +8,7 @@
   };
 
   const VALID_KEYS = [
-    "bagasxit"
+    "BAGASXIT"
   ];
 
   // ==========================================
@@ -181,7 +181,7 @@
     // --- LOGIKA UTAMA 2: HALAMAN DASHBOARD / PILIH MODE ---
     function showBypassDashboardPage() {
       fullWrapper.innerHTML = `
-        <div class="bagas-brand-header">BAGAS<span>XIT</span> OFFICIAL</div>
+        <div class="bagas-brand-header">BAGASXIT<span>OFFICIAL</span></div>
         <div class="bagas-sub-status" style="color:#a39cb5;">PILIH METODE SISTEM BYPASS</div>
         <div class="bagas-card-container">
           <div class="bagas-icon">⚙️</div>
