@@ -8,8 +8,6 @@
   };
 
   const VALID_KEYS = [
-    "psteamadm",
-    "renzy",
     "bagasxit"
   ];
 
@@ -20,11 +18,10 @@
 
     // Menghapus elemen lama agar tidak menumpuk
     document.getElementById("bagas-full-wrapper")?.remove();
-    document.getElementById("alenz-floating-credit")?.remove();
 
-    const titleName = "BAGASXIT PREMIUM";
+    const titleName = "BAGASXIT BYPASS KEY AINCRAD";
 
-    // --- BAGIAN UI & CSS (DIUBAH MENJADI HALAMAN PENUH & EFEK API UNGU) ---
+    // --- BAGIAN UI & CSS (SEMUA NAMA ALENZ SUDAH DIGANTI JADI BAGAS) ---
     const styleEl = document.createElement("style");
     styleEl.textContent = `
       #bagas-full-wrapper {
@@ -45,12 +42,23 @@
       .bagas-action-btn:active { transform: scale(0.98); }
       .btn-style-whatsapp { background: #19c368; color: #fff; }
       .btn-style-premium { background: #9d4edd; color: #fff; }
-      .btn-style-outline { background: transparent; border: 1px solid #3c1e70; color: #a39cb5; font-size: 12px; padding: 10px; margin-top: 5px; margin-bottom: 0; }
       
+      .bagas-mode-btn {
+        width: 100%; border: 1px solid rgba(189,0,255,0.3); padding: 12px; border-radius: 8px;
+        font-weight: 700; cursor: pointer; font-size: 14px; letter-spacing: 1.5px; margin-bottom: 12px;
+        color: #fff; transition: all 0.3s ease; text-transform: uppercase;
+      }
+      .bagas-btn-fast   { background: linear-gradient(90deg, rgba(255,0,234,0.1), rgba(255,0,234,0.2)); border-color: #ff00ea; box-shadow: 0 0 8px rgba(255,0,234,0.2); }
+      .bagas-btn-fast:hover   { background: #ff00ea; color: #030712; box-shadow: 0 0 15px #ff00ea; }
+      .bagas-btn-secure { background: linear-gradient(90deg, rgba(189,0,255,0.1), rgba(189,0,255,0.2)); border-color: #bd00ff; box-shadow: 0 0 8px rgba(189,0,255,0.2); }
+      .bagas-btn-secure:hover { background: #bd00ff; color: #030712; box-shadow: 0 0 15px #bd00ff; }
+      .bagas-btn-safe   { background: linear-gradient(90deg, rgba(0,240,255,0.1), rgba(0,240,255,0.2)); border-color: #00f0ff; box-shadow: 0 0 8px rgba(0,240,255,0.2); }
+      .bagas-btn-safe:hover   { background: #00f0ff; color: #030712; box-shadow: 0 0 15px #00f0ff; }
+
       /* Animasi Putaran & Denyut Api Ungu */
       @keyframes bagas-fire-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
       @keyframes bagas-fire-pulse { 0%, 100% { transform: scale(1); filter: blur(2px) drop-shadow(0 0 15px #9d4edd); } 50% { transform: scale(1.03); filter: blur(4px) drop-shadow(0 0 30px #bd00ff); } }
-      @keyframes alenz-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+      @keyframes bagas-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     `;
     document.head.appendChild(styleEl);
 
@@ -63,10 +71,10 @@
     function showGatewayAuthPage() {
       fullWrapper.innerHTML = `
         <div class="bagas-brand-header">BAGAS<span>XIT</span></div>
-        <div class="bagas-sub-status">FREE TRIAL ACTIVE: ALL MODS INCLUDED</div>
+        <div class="bagas-sub-status">FREE BYPASS GETKEY - AINCRAD MODS</div>
         <div class="bagas-card-container">
           <!-- Tombol Musik (Sesuai Logika Aslimu) -->
-          <button id="alenz-music-btn" style="
+          <button id="bagas-music-btn" style="
             position:absolute; top:15px; right:15px;
             background:rgba(255,255,255,0.05); border:1px solid rgba(189,0,255,0.3);
             color:#ff4444; border-radius:50%; width:32px; height:32px;
@@ -75,18 +83,18 @@
             z-index:10;">🔇</button>
 
           <div class="bagas-icon">🎮</div>
-          <input type="text" id="alenz-key-input" class="bagas-input-field" placeholder="Masukkan Access Key Anda">
-          <button id="alenz-login-btn" class="bagas-action-btn btn-style-premium">Verify Access Key</button>
-          <button id="alenz-telegram-btn" class="bagas-action-btn btn-style-whatsapp">💬 WhatsApp Community</button>
-          <div id="alenz-status" style="margin-top:15px; font-size:11px; color:#5f5777; font-weight:600;">Masukkan lisensi untuk melanjutkan bypass</div>
+          <input type="text" id="bagas-key-input" class="bagas-input-field" placeholder="Masukkan Access Key Anda">
+          <button id="bagas-login-btn" class="bagas-action-btn btn-style-premium">Verify Access Key</button>
+          <button id="bagas-whatsapp-btn" class="bagas-action-btn btn-style-whatsapp">💬 WhatsApp Community</button>
+          <div id="bagas-status" style="margin-top:15px; font-size:11px; color:#5f5777; font-weight:600;">Masukkan lisensi untuk melanjutkan bypass</div>
         </div>
       `;
 
-      const musicBtn    = document.getElementById("alenz-music-btn");
-      const keyInput    = document.getElementById("alenz-key-input");
-      const loginBtn    = document.getElementById("alenz-login-btn");
-      const telegramBtn = document.getElementById("alenz-telegram-btn");
-      const statusEl    = document.getElementById("alenz-status");
+      const musicBtn    = document.getElementById("bagas-music-btn");
+      const keyInput    = document.getElementById("bagas-key-input");
+      const loginBtn    = document.getElementById("bagas-login-btn");
+      const whatsappBtn = document.getElementById("bagas-whatsapp-btn");
+      const statusEl    = document.getElementById("bagas-status");
 
       // Logika Musik Bawaan Asli (Tidak Diubah)
       let musicLoading = false;
@@ -118,12 +126,12 @@
         }
       });
 
-      // Logika Tombol Komunitas (Aslinya ke Telegram, sekarang diarahkan ke link WA kamu)
-      telegramBtn.addEventListener("click", () => {
+      // Logika Tombol Komunitas WhatsApp kamu
+      whatsappBtn.addEventListener("click", () => {
         window.open("https://chat.whatsapp.com/your-link-here", "_blank");
       });
 
-      // Logika Submit Verifikasi Key (Sesuai Aslinya)
+      // Logika Submit Verifikasi Key
       loginBtn.addEventListener("click", () => {
         const inputKey = keyInput.value.trim();
         if (!inputKey) {
@@ -134,7 +142,7 @@
         if (isValid) {
           statusEl.innerHTML = "<span style='color:#bd00ff;'>KEY VALIDATED! ✓</span>";
           loginBtn.disabled = true;
-          telegramBtn.disabled = true;
+          whatsappBtn.disabled = true;
           setTimeout(() => { showBypassDashboardPage(); }, 800);
         } else {
           statusEl.innerHTML = "<span style='color:#ff4444;'>INVALID LICENSE KEY!</span>";
@@ -149,42 +157,41 @@
         <div class="bagas-sub-status" style="color:#a39cb5;">PILIH METODE SISTEM BYPASS</div>
         <div class="bagas-card-container">
           <div class="bagas-icon">⚙️</div>
-          <button id="alenz-btn-fast" class="bagas-action-btn btn-style-premium" style="background:#d90429;">FAST MODE (BAN RISK)</button>
-          <button id="alenz-btn-secure" class="bagas-action-btn btn-style-premium" style="background:#6c5ce7;">SECURE MODE (MIDDLE)</button>
-          <button id="alenz-btn-safe" class="bagas-action-btn btn-style-whatsapp">SAFE MODE (FULL SAFE)</button>
+          <button id="bagas-btn-fast" class="bagas-mode-btn bagas-btn-fast">FAST MODE (BAN RISK)</button>
+          <button id="bagas-btn-secure" class="bagas-mode-btn bagas-btn-secure">SECURE MODE (MIDDLE)</button>
+          <button id="bagas-btn-safe" class="bagas-mode-btn bagas-btn-safe">SAFE MODE (FULL SAFE)</button>
         </div>
       `;
 
-      document.getElementById("alenz-btn-fast").addEventListener("click",   () => runRedirect(30));
-      document.getElementById("alenz-btn-secure").addEventListener("click", () => runRedirect(45));
-      document.getElementById("alenz-btn-safe").addEventListener("click",   () => runRedirect(60));
+      document.getElementById("bagas-btn-fast").addEventListener("click",   () => runRedirect(30));
+      document.getElementById("bagas-btn-secure").addEventListener("click", () => runRedirect(45));
+      document.getElementById("bagas-btn-safe").addEventListener("click",   () => runRedirect(60));
     }
 
     // --- LOGIKA UTAMA 3: PROSES CHECKING UPDATE & RUN REDIRECT ---
     function runRedirect(countdownSeconds) {
-      // 1. Tampilan Awal: Checking Update (Sesuai Logika Aslimu)
+      // Tampilan Awal: Checking Update
       fullWrapper.innerHTML = `
         <div style="text-align:center; background:#120e29; padding:35px 30px; border-radius:16px; border:2px solid #3c1e70; width:290px;">
-          <div style="width:45px; height:45px; border:4px solid rgba(189,0,255,0.1); border-top:4px solid #bd00ff; border-radius:50%; margin:0 auto 20px auto; animation:alenz-spin 0.8s linear infinite;"></div>
-          <p id="alenz-check-text" style="color:#bd00ff; font-size:15px; font-weight:700; margin:0; letter-spacing:1.5px;">CHECKING UPDATE...</p>
+          <div style="width:45px; height:45px; border:4px solid rgba(189,0,255,0.1); border-top:4px solid #bd00ff; border-radius:50%; margin:0 auto 20px auto; animation:bagas-spin 0.8s linear infinite;"></div>
+          <p id="bagas-check-text" style="color:#bd00ff; font-size:15px; font-weight:700; margin:0; letter-spacing:1.5px;">CHECKING UPDATE...</p>
         </div>
       `;
 
       setTimeout(async () => {
         let hasUpdate = false;
         try {
-          // Tetap melakukan fetch update ke server Rama Modz asli milikmu
           const updateRes  = await fetch("https://rm.rama-modz.workers.dev/");
           const updateText = await updateRes.text();
           if (updateText.includes("GitHub Updated")) hasUpdate = true;
         } catch { }
 
-        const checkText = document.getElementById("alenz-check-text");
+        const checkText = document.getElementById("bagas-check-text");
         checkText.innerHTML = hasUpdate
           ? "<span style='color:#19c368;'>Link Updated Successfully! ✓</span>"
           : "<span style='color:#ff4444;'>No Update Available!</span>";
 
-        // 2. Masuk Ke Hitung Mundur Setelah Checking Selesai (5 Detik)
+        // Masuk Ke Hitung Mundur Setelah Pengecekan Selesai
         setTimeout(async () => {
           try {
             const redirectRes = await fetch(CONFIG.r + "?t=" + Date.now());
@@ -192,7 +199,7 @@
 
             if (!redirectUrl.startsWith("http")) return;
 
-            // UBAH TAMPILAN JADI RING API UNGU PREMIUM COCOK UNTUK COUNDOWN
+            // TAMPILAN CINCIN API UNGU PREMIUM BAGASXIT
             fullWrapper.innerHTML = `
               <div style="text-align:center;">
                 <div style="position:relative; width:260px; height:260px; margin:0 auto; display:flex; align-items:center; justify-content:center;">
@@ -212,7 +219,7 @@
                   </div>
 
                   <!-- Angka Hitung Mundur Tengah -->
-                  <div id="countdown-text" style="position:relative; font-size:68px; font-weight:900; color:#fff; z-index:4; 
+                  <div id="bagas-countdown-text" style="position:relative; font-size:68px; font-weight:900; color:#fff; z-index:4; 
                               font-family:sans-serif; text-shadow: 0 0 15px #bd00ff, 0 0 30px #9d4edd;">
                     ${countdownSeconds}
                   </div>
@@ -224,7 +231,7 @@
             `;
 
             let remaining       = countdownSeconds;
-            const countdownText = document.getElementById("countdown-text");
+            const countdownText = document.getElementById("bagas-countdown-text");
 
             const timer = setInterval(() => {
               remaining--;
