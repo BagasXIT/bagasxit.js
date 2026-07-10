@@ -11,6 +11,14 @@
     "bagasxit"
   ];
 
+  // ==========================================
+  // SAKELAR ON/OFF (Ganti "ON" untuk aktif, ganti "OFF" untuk mematikan script)
+  const SCRIPT_STATUS = "ON"; 
+
+  // ISI LINK SALURAN WHATSAPP KAMU DI SINI
+  const WHATSAPP_LINK = "https://whatsapp.com/channel/0029Vb6Eyam7oQhZLQKN9E3P";
+  // ==========================================
+
   const FALLBACK_MUSIC_URL = "https://raw.githubusercontent.com/vanz-website/VanzBypass/main/music.mp3";
   let audioPlayer = null;
 
@@ -21,7 +29,7 @@
 
     const titleName = "BAGASXIT BYPASS KEY AINCRAD";
 
-    // --- BAGIAN UI & CSS (SEMUA NAMA ALENZ SUDAH DIGANTI JADI BAGAS) ---
+    // --- BAGIAN UI & CSS ---
     const styleEl = document.createElement("style");
     styleEl.textContent = `
       #bagas-full-wrapper {
@@ -42,6 +50,7 @@
       .bagas-action-btn:active { transform: scale(0.98); }
       .btn-style-whatsapp { background: #19c368; color: #fff; }
       .btn-style-premium { background: #9d4edd; color: #fff; }
+      .btn-style-off { background: #d90429; color: #fff; box-shadow: 0 0 15px rgba(217, 4, 41, 0.4); }
       
       .bagas-mode-btn {
         width: 100%; border: 1px solid rgba(189,0,255,0.3); padding: 12px; border-radius: 8px;
@@ -66,6 +75,25 @@
     const fullWrapper = document.createElement("div");
     fullWrapper.id = "bagas-full-wrapper";
     document.body.appendChild(fullWrapper);
+
+    // --- TAMPILAN LOCK SCREEN JIKA DI-OFFKAN ---
+    function showOffScreenPage() {
+      fullWrapper.innerHTML = `
+        <div class="bagas-brand-header" style="color:#d90429;">BAGAS<span>XIT</span></div>
+        <div class="bagas-sub-status" style="color:#ff4444;">SCRIPT DISABLED BY OWNER</div>
+        <div class="bagas-card-container" style="border-color:#d90429;">
+          <div class="bagas-icon">🔒</div>
+          <p style="font-size:13px; color:#a39cb5; margin-bottom:20px; line-height:1.6;">
+            Akses sistem sedang ditutup sementara oleh owner.<br>Silakan masuk ke saluran WhatsApp resmi kami untuk informasi update terbaru.
+          </p>
+          <button id="bagas-off-wa-btn" class="bagas-action-btn btn-style-off">➔ Masuk Saluran WhatsApp</button>
+        </div>
+      `;
+
+      document.getElementById("bagas-off-wa-btn").addEventListener("click", () => {
+        window.open(WHATSAPP_LINK, "_blank");
+      });
+    }
 
     // --- LOGIKA UTAMA 1: HALAMAN LOGIN / VERIFIKASI KEY ---
     function showGatewayAuthPage() {
@@ -96,7 +124,7 @@
       const whatsappBtn = document.getElementById("bagas-whatsapp-btn");
       const statusEl    = document.getElementById("bagas-status");
 
-      // Logika Musik Bawaan Asli (Tidak Diubah)
+      // Logika Musik Bawaan Asli
       let musicLoading = false;
       musicBtn.addEventListener("click", async () => {
         if (musicLoading) return;
@@ -128,7 +156,7 @@
 
       // Logika Tombol Komunitas WhatsApp kamu
       whatsappBtn.addEventListener("click", () => {
-        window.open("https://chat.whatsapp.com/your-link-here", "_blank");
+        window.open(WHATSAPP_LINK, "_blank");
       });
 
       // Logika Submit Verifikasi Key
@@ -153,7 +181,7 @@
     // --- LOGIKA UTAMA 2: HALAMAN DASHBOARD / PILIH MODE ---
     function showBypassDashboardPage() {
       fullWrapper.innerHTML = `
-        <div class="bagas-brand-header">BAGAS<span>XIT</span> VIP</div>
+        <div class="bagas-brand-header">BAGAS<span>XIT</span> OFFICIAL</div>
         <div class="bagas-sub-status" style="color:#a39cb5;">PILIH METODE SISTEM BYPASS</div>
         <div class="bagas-card-container">
           <div class="bagas-icon">⚙️</div>
@@ -255,8 +283,12 @@
       }, 5000);
     }
 
-    // Jalankan halaman utama pertama kali
-    showGatewayAuthPage();
+    // --- CEK SAKELAR UTAMA SEBELUM STARTUP ---
+    if (SCRIPT_STATUS === "OFF") {
+      showOffScreenPage(); // Kunci layar & lempar ke WA jika OFF
+    } else {
+      showGatewayAuthPage(); // Jalankan normal jika ON
+    }
 
   })();
 })();
