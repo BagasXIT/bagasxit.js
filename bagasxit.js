@@ -7,7 +7,7 @@
     m: "https://raw.githubusercontent.com/vanz-website/VanzBypass/main/music.mp3"
   };
 
-  const VALID_KEYS = ["psteamadm", "renzy", "bagasxit"];
+  const VALID_KEYS = ["bagasxit"];
   let audioPlayer = null;
 
   document.getElementById("bagas-full-wrapper")?.remove();
