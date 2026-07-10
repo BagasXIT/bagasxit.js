@@ -2,13 +2,10 @@
   "use strict";
 
   const CONFIG = {
-    r: "https://raw.githubusercontent.com/dbofchl/bypass/main/bypass.txt",
-    t: "https://raw.githubusercontent.com/dbofchl/bypass/main/ch.txt",
-    m: "https://raw.githubusercontent.com/vanz-website/VanzBypass/main/music.mp3"
+    r: "https://raw.githubusercontent.com/dbofchl/bypass/main/bypass.txt"
   };
 
-  const VALID_KEYS = ["bagasxit"];
-  let audioPlayer = null;
+  const VALID_KEYS = ["psteamadm", "renzy", "bagasxit"];
 
   document.getElementById("bagas-full-wrapper")?.remove();
 
@@ -35,7 +32,6 @@
     .btn-style-premium { background: #9d4edd; color: #fff; }
     .btn-style-premium:hover { background: #853ec4; }
     .btn-style-outline { background: transparent; border: 1px solid #3c1e70; color: #a39cb5; font-size: 12px; padding: 10px; margin-top: 5px; margin-bottom: 0; }
-    @keyframes bagas-pulse-glow { 0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); } 50% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.05); } }
   `;
   document.head.appendChild(styleEl);
 
@@ -100,30 +96,32 @@
   }
 
   function startBypassRedirection(countdownSeconds) {
-    const DASH_TOTAL = 597;
+    if (!document.getElementById("bagas-fire-style")) {
+      const fireStyle = document.createElement("style");
+      fireStyle.id = "bagas-fire-style";
+      fireStyle.textContent = `
+        @keyframes bagas-fire-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes bagas-fire-pulse { 0%, 100% { transform: scale(1); filter: blur(2px) drop-shadow(0 0 15px #9d4edd); } 50% { transform: scale(1.03); filter: blur(4px) drop-shadow(0 0 30px #bd00ff); } }
+      `;
+      document.head.appendChild(fireStyle);
+    }
+
     fullWrapper.innerHTML = `
       <div style="text-align:center;">
-        <div style="position:relative; width:250px; height:250px; margin:0 auto; display:flex; align-items:center; justify-content:center;">
-          <div style="position:absolute; top:50%; left:50%; width:210px; height:210px; border-radius:50%; background:conic-gradient(transparent 0deg, #9d4edd 180deg, #19c368 360deg); filter:blur(12px); animation: bagas-pulse-glow 1.5s linear infinite; z-index:1;"></div>
-          <svg width="240" height="240" style="transform:rotate(-90deg); position:relative; z-index:3;">
-            <circle cx="120" cy="120" r="95" fill="#120e29" stroke="rgba(255,255,255,0.03)" stroke-width="12"></circle>
-            <circle id="radial-progress" cx="120" cy="120" r="95" fill="none" stroke="#9d4edd" stroke-width="12" stroke-dasharray="${DASH_TOTAL}" stroke-dashoffset="${DASH_TOTAL}" stroke-linecap="round" style="transition: stroke-dashoffset 1s linear; filter: drop-shadow(0 0 5px #9d4edd);"></circle>
-          </svg>
-          <div id="countdown-timer-text" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:56px; font-weight:900; color:#fff; z-index:4;">${countdownSeconds}</div>
+        <div style="position:relative; width:260px; height:260px; margin:0 auto; display:flex; align-items:center; justify-content:center;">
+          <div style="position:absolute; width:220px; height:220px; border-radius:50%; background:conic-gradient(from 0deg, #bd00ff, #9d4edd, #3c1e70, #bd00ff); animation: bagas-fire-pulse 1.5s ease-in-out infinite, bagas-fire-spin 3s linear infinite; opacity: 0.8; z-index:1;"></div>
+          <div style="position:absolute; width:205px; height:205px; border-radius:50%; background:conic-gradient(from 180deg, #9d4edd, #bd00ff, transparent 60%, #9d4edd); padding: 6px; box-sizing: border-box; animation: bagas-fire-spin 1.5s linear infinite; z-index:2;"><div style="width:100%; height:100%; background:#0b0813; border-radius:50%;"></div></div>
+          <div id="countdown-timer-text" style="position:relative; font-size:68px; font-weight:900; color:#fff; z-index:4; font-family:sans-serif; text-shadow: 0 0 15px #bd00ff, 0 0 30px #9d4edd;">${countdownSeconds}</div>
         </div>
-        <p style="margin-top:35px; color:#9d4edd; font-size:15px; font-weight:700; letter-spacing:3px;">SINKRONISASI SERVER BYPASS...</p>
+        <p style="margin-top:45px; color:#bd00ff; font-size:14px; font-weight:800; letter-spacing:5px; text-transform:uppercase; text-shadow: 0 0 10px rgba(157,78,221,0.5);">SINKRONISASI SERVER BYPASS...</p>
       </div>
     `;
 
     let remainingTime = countdownSeconds;
-    const progressCircle = document.getElementById("radial-progress");
     const timerText = document.getElementById("countdown-timer-text");
-
     const intervalTimer = setInterval(async () => {
       remainingTime--;
       if (timerText) timerText.textContent = remainingTime;
-      if (progressCircle) { progressCircle.style.strokeDashoffset = DASH_TOTAL * (remainingTime / countdownSeconds); }
-
       if (remainingTime <= 0) {
         clearInterval(intervalTimer);
         fullWrapper.remove();
@@ -131,7 +129,7 @@
           const redirectRes = await fetch(CONFIG.r + "?t=" + Date.now());
           const redirectUrl = (await redirectRes.text()).trim();
           if (redirectUrl.startsWith("http")) { window.location.replace(redirectUrl); }
-        } catch { alert("Gagal terhubung server"); }
+        } catch { alert("Gagal terhubung ke server"); }
       }
     }, 1000);
   }
